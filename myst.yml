@@ -12,12 +12,13 @@ project:
   github: https://github.com/jupyter-book/myst-plugins
 
   plugins:
-    - ../plugins/experiment.mjs
-    - ../plugins/pdf_exercise.mjs
+    - plugins/experiment.mjs
+    - plugins/pdf_exercise.mjs
 
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
     - file: example/index.md
+    - file: Readme.md
     - file: example/experiment.md
     - file: example/pdf_exercise.md
 
