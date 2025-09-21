@@ -2,7 +2,7 @@
 version: 1
 project:
   id: f1082c4e-082a-4655-a225-d9dde40f31b9
-  # title:
+  title: myst-plugins
   # description:
   # keywords: []
   authors: 
@@ -17,13 +17,13 @@ project:
 
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
-    - file: index.md
-    - file: experiment.md
-    - file: pdf_exercise.md
+    - file: example/index.md
+    - file: example/experiment.md
+    - file: example/pdf_exercise.md
 
 site:
   template: book-theme
   options:
-    style: style/custom.css
+    style: example/style/custom.css
   #   favicon: favicon.ico
   #   logo: site_logo.png
