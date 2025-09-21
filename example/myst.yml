@@ -1,0 +1,29 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: f1082c4e-082a-4655-a225-d9dde40f31b9
+  # title:
+  # description:
+  # keywords: []
+  authors: 
+    - Freek Pols
+    - Luuk Fröling
+  
+  github: https://github.com/jupyter-book/myst-plugins
+
+  plugins:
+    - ../plugins/experiment.mjs
+    - ../plugins/pdf_exercise.mjs
+
+  # To autogenerate a Table of Contents, run "myst init --write-toc"
+  toc:
+    - file: index.md
+    - file: experiment.md
+    - file: pdf_exercise.md
+
+site:
+  template: book-theme
+  options:
+    style: style/custom.css
+  #   favicon: favicon.ico
+  #   logo: site_logo.png
