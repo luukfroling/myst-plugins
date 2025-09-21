@@ -18,7 +18,7 @@ project:
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
     - file: example/index.md
-    - file: Readme.md
+    - file: README.md
     - file: example/experiment.md
     - file: example/pdf_exercise.md
 
