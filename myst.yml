@@ -15,6 +15,7 @@ project:
     - plugins/experiment.mjs
     - plugins/pdf_exercise.mjs
     - plugins/picsum.mjs
+    - plugins/markup.mjs
 
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
@@ -23,6 +24,7 @@ project:
     - file: example/experiment.md
     - file: example/pdf_exercise.md
     - file: example/picsum.md
+    - file: example/markup.md
 
 site:
   template: book-theme
