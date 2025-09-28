@@ -2,16 +2,16 @@
 exports:
     - format: typst
       template: https://github.com/myst-templates/plain_typst_book.git
-      output: exports/experiment.pdf
-      id: pdf_experiment
+      output: exports/intermezzo.pdf
+      id: pdf_intermezzo
 downloads:
-    - id: pdf_experiment
+    - id: pdf_intermezzo
 ---
 
 # Experiment
 
-```{experiment} Hooke's law
-:label: hookes-law
+```{intermezzo} Hooke's law
+:label: hookes-law-intermezzo
 
 Some description
 ```

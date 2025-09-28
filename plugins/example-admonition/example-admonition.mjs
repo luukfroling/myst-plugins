@@ -1,20 +1,22 @@
-// style for experiment directive in pdf format
-const experimentStyle = {
-  border : `rgb(255, 0, 0)`,
-  header : `rgb(251,183,183)`,
-  body : `rgb(255,255,255)`
+/* Custom example admonition, based on documentation (see https://next.jupyterbook.org/plugins/directives-and-roles#create-a-custom-admonition). 
+*   css file (custom.css) included in style folder. 
+*/
+
+const exampleStyle = {
+  border: `rgb(12, 35, 64)`,
+  header: `rgb(0, 118, 194)`,
+  body: `rgb(255, 255, 255)`
 }
 
-//Helper function to get text from a node
 let getText = (node) => {
   if(node.type === "text") return node.value;
   if(node.children) return node.children.map(getText).join("");
   return "";
 }
 
-const experiment = {
-  name: "experiment",
-  doc: "An experiment admonition that uses a specific color.",
+const example = {
+  name: "example",
+  doc: "A custom admonition that uses a specific color.",
   arg: { type: String, doc: "The title of the admonition." },
   options: {
     collapsed: { type: Boolean, doc: "Whether to collapse the admonition." },
@@ -28,19 +30,19 @@ const experiment = {
     const admonition = {
       "type": "admonition",
       "kind": "note",
-      "class": "admonition-experiment",  //Add class (custom.css)
+      "class": "admonition-example",  //Add class (custom.css)
       "icon": false,
       "children": [
         
         {
           "type": "admonitionTitle",
-          "class": "admonition-title-experiment",
+          "class": "admonition-title-example",
           "children": ctx.parseMyst(`${title}`)["children"][0]["children"]
         },
         
         {
           "type": "paragraph",
-          "class": "admonition-body-experiment", //add 'fake' class, for later use and for selecting in transform
+          "class": "admonition-body-example", //add 'fake' class, for later use and for selecting in transform
           "children": ctx.parseMyst(body)["children"] 
         }
       ]
@@ -50,9 +52,9 @@ const experiment = {
   }
 };
 
-const experimentTransform = {
-  name: "conditional-experiment",
-  doc: "Replace custom experiment admonitions in PDF builds.",
+const exampleTransform = {
+  name: "conditional-example",
+  doc: "Replace custom example admonitions in PDF builds.",
   stage: "document",
   plugin: (opts, utils) => (tree) => {
     
@@ -63,13 +65,13 @@ const experimentTransform = {
     if(!isPDF) return;
 
     // As we defined the node ourselves, we can search for it
-    const experiments = utils.selectAll('admonition[class~="admonition-experiment"]', tree);
+    const examples = utils.selectAll('admonition[class~="admonition-example"]', tree);
 
-    experiments.forEach((node) => {
+    examples.forEach((node) => {
 
       // Get title and body
-      const titleNode = utils.select('admonitionTitle[class~="admonition-title-experiment"]', node);
-      const bodyNode = utils.select('paragraph[class~="admonition-body-experiment"]', node); 
+      const titleNode = utils.select('admonitionTitle[class~="admonition-title-example"]', node);
+      const bodyNode = utils.select('paragraph[class~="admonition-body-example"]', node); 
 
       const title = getText(titleNode);
       const body = getText(bodyNode);
@@ -82,8 +84,8 @@ const experimentTransform = {
           // template_admonition.typ
 
           #block(
-            fill: ${experimentStyle.header},
-            stroke: (left: 1pt + ${experimentStyle.border}),
+            fill: ${exampleStyle.header},
+            stroke: (left: 1pt + ${exampleStyle.border}),
             width: 100%,
             inset: (x: 0.8em, y: 0.4em),
             above: 0.5em,
@@ -92,8 +94,8 @@ const experimentTransform = {
           )
 
           #block(
-            fill: ${experimentStyle.body},
-            stroke: (left: 1pt + ${experimentStyle.border}),
+            fill: ${exampleStyle.body},
+            stroke: (left: 1pt + ${exampleStyle.border}),
             width: 100%,
             inset: (x: 0.8em, y: 0.6em),
             above: 0em,
@@ -108,9 +110,9 @@ const experimentTransform = {
 };
 
 const plugin = {
-  name: "experiment",
-  directives: [experiment],
-  transforms: [experimentTransform],
+  name: "example-plugin",
+  directives: [example],
+  transforms: [exampleTransform],
 };
 
 export default plugin;
