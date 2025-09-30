@@ -18,6 +18,7 @@ project:
     - plugins/intermezzo-admonition/intermezzo-admonition.mjs
     - plugins/picsum/picsum.mjs
     - plugins/markup/markup.mjs
+    - plugins/iframe-to-thumbnail-pdf/iframe-to-thumbnail-pdf.mjs
 
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
@@ -29,6 +30,7 @@ project:
     - file: example/markup.md
     - file: example/intermezzo.md
     - file: example/example.md
+    - file: example/iframe-to-thumbnail.md
 
 
 site:
