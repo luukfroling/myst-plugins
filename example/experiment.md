@@ -9,9 +9,20 @@ downloads:
 ---
 
 # Experiment
+You can create an **experiment admonition** by adding an `experiment` directive.
+
+````markdown
+```{experiment} Hooke's law
+:label: hookes-law-experiment
+
+Some description
+```
+````
+
+This will render an admonition like:
 
 ```{experiment} Hooke's law
-:label: hookes-law
+:label: hookes-law-experiment
 
 Some description
 ```

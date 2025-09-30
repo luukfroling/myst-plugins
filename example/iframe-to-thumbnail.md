@@ -10,8 +10,6 @@ downloads:
 
 # iframe-to-thumbnail pdf
 
-Converts an embedded youtube video to the thumbnail image.
-
 ```{iframe} https://www.youtube.com/embed/seKOq-VMJgY?si=NjrDJRkoPczQbznv
 Overview of Jupyter Book
 ```

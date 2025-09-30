@@ -8,9 +8,21 @@ downloads:
     - id: pdf_intermezzo
 ---
 
-# Experiment
+# Intermezzo
 
-```{intermezzo} Hooke's law
+You can create an **intermezzo admonition** by adding an `intermezzo` directive.
+
+````markdown
+```{intermezzo} Hooke's law intermezzo
+:label: hookes-law-intermezzo
+
+Some description
+```
+````
+
+This will render an admonition like:
+
+```{intermezzo} Hooke's law intermezzo
 :label: hookes-law-intermezzo
 
 Some description
