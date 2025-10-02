@@ -8,7 +8,9 @@ downloads:
     - id: pdf_exercise
 ---
 
-# pdf_exercise
+# exercise admonition pdf
+
+This plugin allows exercises and solutions to be included in PDF builds. 
 
 ```{exercise} Basic calculation
 :label: exc_basic-calculation
@@ -19,3 +21,4 @@ downloads:
 ```{solution} exc_basic-calculation
 
 The answer is 5.
+```
