@@ -19,7 +19,7 @@ project:
     - plugins/picsum/picsum.mjs
     - plugins/markup/markup.mjs
     - plugins/iframe-to-thumbnail-pdf/iframe-to-thumbnail-pdf.mjs
-    - plugins/update-date-frontmatter/update-date-frontmatter.mjs
+    - plugins/update-date-frontmatter/dist/update-date-frontmatter.mjs
 
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
