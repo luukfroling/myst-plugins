@@ -1648,19 +1648,11 @@ var iframeTransform = {
       const folderPath = relativePath.substring(0, relativePath.lastIndexOf("\\"));
       const images = utils.selectAll("container", tree);
       for (const [index, node] of rootChildren.entries()) {
-        if (node.kind === "figure") {
-          console.log(node);
-        }
         if (node.type === "container" && node.children[0]?.type === "iframe") {
           if (!existsSync(`.${folderPath}\\${image_folder}`)) {
             mkdirSync(`.${folderPath}\\${image_folder}`);
-            console.log(`[IFRAME] Created folder: ${folderPath}\\${image_folder}`);
-          } else {
-            console.log(`[IFRAME] Folder already exists: ${folderPath}\\${image_folder}`);
           }
           const url = node.children[0]?.src || "No link found";
-          let youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
-          let thumbnail = `https://img.youtube.com/vi/${youtube_video_id}/0.jpg`;
           let caption = node.children[1]?.children[0]?.children[0]?.value || " - ";
           const urlParts = url.split("/");
           const lastPart = urlParts[urlParts.length - 1];
@@ -1672,7 +1664,29 @@ var iframeTransform = {
             const svg = qr.createSvgTag({ cellSize: 4, margin: 2 });
             const outputFile = `.${folderPath}\\${image_folder}\\qrcode_${node.qr_index}.svg`;
             await writeFile(outputFile, svg, "utf8");
-            console.log(`[IFRAME] Generated QR code, saved to ${outputFile}`);
+            if (!url.includes("youtube")) {
+              node.type = "container";
+              node.kind = "figure";
+              node.children = [
+                {
+                  type: "image",
+                  url: `qr_images/qrcode_${node.qr_index}.svg`,
+                  width: "200px",
+                  alt: "QR code"
+                },
+                {
+                  type: "paragraph",
+                  children: [
+                    { type: "text", value: `${caption} - Scan the QR code or click ` },
+                    { type: "link", url, children: [{ type: "text", value: "here" }] },
+                    { type: "text", value: " to go to the video." }
+                  ]
+                }
+              ];
+              continue;
+            }
+            let youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
+            let thumbnail = `https://img.youtube.com/vi/${youtube_video_id}/0.jpg`;
             node.type = "container";
             node.kind = "figure";
             node.children = [

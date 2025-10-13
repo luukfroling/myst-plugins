@@ -19,7 +19,8 @@ project:
     - plugins/picsum/picsum.mjs
     - plugins/markup/markup.mjs
     # - plugins/iframe-to-thumbnail-pdf/iframe-to-thumbnail-pdf.mjs
-    - https://github.com/jupyter-book/myst-plugins/releases/download/iframe-to-qr-pdf/iframe-to-qr-pdf.mjs
+    # - https://github.com/jupyter-book/myst-plugins/releases/download/iframe-to-qr-pdf/iframe-to-qr-pdf.mjs
+    - plugins/iframe-to-qr-pdf/src/iframe-to-qr-pdf.mjs
     - https://github.com/jupyter-book/myst-plugins/releases/download/updated-date-frontmatter/update-date-frontmatter.mjs
 
   # To autogenerate a Table of Contents, run "myst init --write-toc"

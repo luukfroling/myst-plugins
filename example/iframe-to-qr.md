@@ -15,3 +15,11 @@ This plugin will replace every iframe directive with the youtube thumbnail for P
 ```{iframe} https://www.youtube.com/embed/seKOq-VMJgY?si=NjrDJRkoPczQbznv
 Overview of Jupyter Book
 ```
+
+In case the iframe does not contain a youtube video, only the qr code will be used. 
+
+```{iframe} https://trinket.io/embed/glowscript/44e9d32f7951
+:name: trinket_iframe
+
+A non-youtube iframe
+```
