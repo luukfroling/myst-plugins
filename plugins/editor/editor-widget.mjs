@@ -1,4 +1,4 @@
-console.log("[wizard] Script loaded (updated).");
+console.log("[wizard] Script loaded.");
 
 let isEditorMode = false;
 let iframeElement = null;
@@ -14,9 +14,10 @@ let loaderElement = null;
 let hasError = false;
 let errorMessage = ""; 
 
-// check if metadata is present (owner, repo, file)
+// Check if metadata is present (owner, repo, file)
 const parseMetadata = function() {
 
+    // Get the Github Repository and Edit This Page anchors from the page metadata
     const repoAnchor = document.querySelector('a[title*="GitHub Repository:"]');
     const fileAnchor = document.querySelector('a[title="Edit This Page"]');
 
@@ -53,6 +54,8 @@ const createToggleButton = function() {
         // Create slider markup: <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
         const wrapper = document.createElement('label');
         wrapper.className = 'switch';
+
+        wrapper.id = "wizard-toggler"
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -133,38 +136,6 @@ input:checked + .slider:before {
 `;
     document.head.appendChild(style);
 };
-
-    const injectLoaderStyles = function() {
-        if (document.getElementById('wizard-loader-styles')) return;
-        const style = document.createElement('style');
-        style.id = 'wizard-loader-styles';
-        style.textContent = `
-    .wizard-loading { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; margin: 0 12px; }
-    .wizard-loading svg { width: 20px; height: 20px; animation: wizard-spin 1s linear infinite; }
-    @keyframes wizard-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    `;
-        document.head.appendChild(style);
-    };
-
-    const createLoadingIndicator = function() {
-        injectLoaderStyles();
-        const el = document.createElement('div');
-        el.className = 'wizard-loading';
-        el.setAttribute('aria-hidden', 'true');
-        el.innerHTML = `
-            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="25" cy="25" r="20" fill="none" stroke="#999" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4"></circle>
-            </svg>`;
-        return el;
-    };
-
-    const removeLoadingIndicator = function() {
-        try {
-            if (!loaderElement) return;
-            if (loaderElement.parentNode) loaderElement.parentNode.removeChild(loaderElement);
-            loaderElement = null;
-        } catch (e) {}
-    };
 
 const hideOriginalContent = function() {
     container = document.querySelector('article') || document.body;
@@ -273,32 +244,21 @@ const addToggleButton = function() {
     console.log("[wizard] Toggle button added to navbar.");
 };
 
-const initWizard = function() {
-    // Initialize: parse metadata, inject styles, and add the toggle.
-    // Do NOT auto-open the editor — default is original content. Users toggle when ready.
+
+function render({ model, el }) {   
     if (!parseMetadata()) {
         return;
     }
-    injectToggleStyles();
-    addToggleButton();
-};
 
-// Add the toggle after 4 seconds so it doesn't interfere with initial page rendering
-console.log("[wizard] Scheduling wizard toggle insertion in 4s...");
-document.addEventListener("DOMContentLoaded", () => {
-    // Insert a small loading indicator in the navbar immediately, then replace with the toggle after 4s
-    try {
-        const navbar = document.querySelector('div.flex.items-center.flex-grow.w-auto');
-        if (navbar) {
-            const themeButton = navbar.querySelector('.myst-theme-button');
-            loaderElement = createLoadingIndicator();
-            if (themeButton) themeButton.parentNode.insertBefore(loaderElement, themeButton);
-            else navbar.appendChild(loaderElement);
-        }
-    } catch (e) { console.warn('[wizard] Could not insert loader', e); }
+    // Check if wizard toggler exists
+    if(document.getElementById("wizard-toggler") == null){
+        injectToggleStyles();
+        addToggleButton();
+    } else {
+        console.log("[wizard] Toggle button already exists, skipping creation.");
+    }
 
-    setTimeout(() => {
-        removeLoadingIndicator();
-        initWizard();
-    }, 4000);
-});
+
+
+}
+export default { render };

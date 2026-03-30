@@ -51,10 +51,11 @@ jobs:
         with:
           name: vite-dist
           path: ./_tmp/editor-dist
-      - name: Copy editor into site at /editor/
+      # Note: changing the path will change the url the editor is served from, e.g. /editor-main-app/
+      - name: Copy editor into site at /editor-main-app/
         run: |
-          mkdir -p ./_build/html/editor
-          cp -R ./_tmp/editor-dist/. ./_build/html/editor/
+          mkdir -p ./_build/html/editor-main-app
+          cp -R ./_tmp/editor-dist/. ./_build/html/editor-main-app/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
